@@ -35,7 +35,6 @@
             android:value="2" />
 
         <service android:name="com.ryanheise.audioservice.AudioService"
-            android:foreground="true"
             android:exported="true"
             android:foregroundServiceType="mediaPlayback"
             tools:ignore="Instantiatable">
