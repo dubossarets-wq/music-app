@@ -37,6 +37,7 @@ jobs:
           if [ -f "$FILE" ] && ! grep -q "namespace" "$FILE"; then
             sed -i "s/android {/android {\n    namespace 'com.lucasjosino.on_audio_query'\n    compileOptions {\n        sourceCompatibility JavaVersion.VERSION_11\n        targetCompatibility JavaVersion.VERSION_11\n    }\n    kotlinOptions {\n        jvmTarget = '11'\n    }/" "$FILE"
           fi
+          sed -i "s/compileSdkVersion 33/compileSdkVersion 35/" "$FILE"
           cat "$FILE"
 
       - name: Render launcher icon
