@@ -35,15 +35,7 @@ jobs:
         run: |
           FILE=$(find "$HOME/.pub-cache/hosted/pub.dev" -maxdepth 1 -name "on_audio_query_android-*" -type d)/android/build.gradle
           if [ -f "$FILE" ] && ! grep -q "namespace" "$FILE"; then
-            sed -i "/android {/a\\
-    namespace 'com.lucasjosino.on_audio_query'\\
-    compileOptions {\\
-        sourceCompatibility JavaVersion.VERSION_11\\
-        targetCompatibility JavaVersion.VERSION_11\\
-    }\\
-    kotlinOptions {\\
-        jvmTarget = '11'\\
-    }" "$FILE"
+            sed -i "s/android {/android {\n    namespace 'com.lucasjosino.on_audio_query'\n    compileOptions {\n        sourceCompatibility JavaVersion.VERSION_11\n        targetCompatibility JavaVersion.VERSION_11\n    }\n    kotlinOptions {\n        jvmTarget = '11'\n    }/" "$FILE"
           fi
           cat "$FILE"
 
