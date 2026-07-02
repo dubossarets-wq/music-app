@@ -31,11 +31,19 @@ jobs:
         working-directory: build_app
         run: flutter pub get
 
-      - name: Patch on_audio_query_android namespace (AGP8 requirement)
+      - name: Patch on_audio_query_android build.gradle (AGP8 namespace + JVM target)
         run: |
           FILE=$(find "$HOME/.pub-cache/hosted/pub.dev" -maxdepth 1 -name "on_audio_query_android-*" -type d)/android/build.gradle
           if [ -f "$FILE" ] && ! grep -q "namespace" "$FILE"; then
-            sed -i "s/android {/android {\n    namespace 'com.lucasjosino.on_audio_query'/" "$FILE"
+            sed -i "/android {/a\\
+    namespace 'com.lucasjosino.on_audio_query'\\
+    compileOptions {\\
+        sourceCompatibility JavaVersion.VERSION_11\\
+        targetCompatibility JavaVersion.VERSION_11\\
+    }\\
+    kotlinOptions {\\
+        jvmTarget = '11'\\
+    }" "$FILE"
           fi
           cat "$FILE"
 
