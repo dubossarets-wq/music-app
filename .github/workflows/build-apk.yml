@@ -1,0 +1,47 @@
+name: Build APK
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Scaffold Flutter Android project
+        run: flutter create --platforms=android --org com.skilletplayer --project-name skillet_player build_app
+
+      - name: Overlay custom source
+        run: |
+          rm -rf build_app/lib
+          cp -r src/lib build_app/lib
+          cp src/pubspec.yaml build_app/pubspec.yaml
+          rm -rf build_app/assets
+          cp -r src/assets build_app/assets
+          cp overlay_android/app/src/main/AndroidManifest.xml build_app/android/app/src/main/AndroidManifest.xml
+
+      - name: Get dependencies
+        working-directory: build_app
+        run: flutter pub get
+
+      - name: Render launcher icon
+        working-directory: build_app
+        run: |
+          convert -background none assets/icon/icon.svg -resize 1024x1024 assets/icon/icon.png
+          dart run flutter_launcher_icons
+
+      - name: Build release APK
+        working-directory: build_app
+        run: flutter build apk --release
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: skillet-player-apk
+          path: build_app/build/app/outputs/flutter-apk/app-release.apk

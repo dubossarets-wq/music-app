@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bolt" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6A3D"/>
+      <stop offset="100%" stop-color="#E8342B"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="180" fill="#0B0B0D"/>
+  <polygon points="560,120 320,560 480,560 440,900 720,460 550,460"
+           fill="url(#bolt)"/>
+</svg>
