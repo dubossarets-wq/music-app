@@ -34,7 +34,9 @@ jobs:
       - name: Render launcher icon
         working-directory: build_app
         run: |
-          convert -background none assets/icon/icon.svg -resize 1024x1024 assets/icon/icon.png
+          sudo apt-get update -y
+          sudo apt-get install -y librsvg2-bin
+          rsvg-convert -w 1024 -h 1024 assets/icon/icon.svg -o assets/icon/icon.png
           dart run flutter_launcher_icons
 
       - name: Build release APK
