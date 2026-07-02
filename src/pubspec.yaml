@@ -9,8 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  on_audio_query: ^3.2.0
-  just_audio: ^0.9.40
+  on_audio_query: ^2.9.0
+  just_audio: ^0.10.0
   just_audio_background: ^0.0.1-beta.13
   permission_handler: ^11.3.1
   provider: ^6.1.2
