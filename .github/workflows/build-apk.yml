@@ -26,6 +26,8 @@ jobs:
           rm -rf build_app/assets
           cp -r src/assets build_app/assets
           cp overlay_android/app/src/main/AndroidManifest.xml build_app/android/app/src/main/AndroidManifest.xml
+          rm -f build_app/android/app/src/main/kotlin/com/skilletplayer/skillet_player/MainActivity.kt
+          cp overlay_android/app/src/main/kotlin/com/skilletplayer/skillet_player/MainActivity.kt build_app/android/app/src/main/kotlin/com/skilletplayer/skillet_player/MainActivity.kt
 
       - name: Get dependencies
         working-directory: build_app
